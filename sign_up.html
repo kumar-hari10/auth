@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Sign_up</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: linear-gradient(135deg, #4f46e5, #6366f1);
+        font-family: Arial, sans-serif;
+      }
+
+      .box {
+        background: #fff;
+        padding: 30px;
+        border-radius: 12px;
+        width: 100%;
+        max-width: 400px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 12px;
+        border-radius: 8px;
+        border: 1px solid #d1d5db;
+        font-size: 15px;
+      }
+
+      #btn {
+        
+        width: 100%;
+        background: #4f46e5;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      #btn:hover {
+        background: #4338ca;
+      }
+
+      .gender-group {
+        margin-left: 20px;
+        width: 100%;
+        margin-bottom: 15px;
+      }
+
+      .gender-group label {
+        font-size: 14px;
+        color: #374151;
+        margin-left: 50px;
+        cursor: pointer;
+      }
+
+      .gender-group input {
+        width: auto;
+        margin-right: 5px;
+      }
+
+      p {
+        text-align: center;
+        font-size: 14px;
+      }
+
+      a {
+        color: #4f46e5;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      span {
+        color: red;
+        font-size: 20px;
+      }
+    </style> -->
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #4f46e5, #6366f1);
+      font-family: Arial, sans-serif;
+    }
+
+    .box {
+      background: #fff;
+      padding: 30px 25px;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #111827;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 8px;
+      border: 1px solid #d1d5db;
+      font-size: 15px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #4f46e5;
+    }
+
+    #btn {
+      width: 100%;
+      padding: 12px;
+      background: #4f46e5;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    #btn:hover {
+      background: #4338ca;
+    }
+
+    .gender-group {
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+
+    .gender-group strong {
+      display: inline;
+      margin-bottom: 6px;
+      color: #374151;
+    }
+
+    .gender-group label {
+      margin-right: 15px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .gender-group input {
+      margin-right: 5px;
+    }
+
+    span {
+      display: block;
+      margin-top: 4px;
+      color: red;
+      font-size: 13px;
+    }
+
+    p {
+      text-align: center;
+      font-size: 14px;
+      margin-top: 15px;
+    }
+
+    a {
+      color: #4f46e5;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Remove table spacing issues */
+    table {
+      width: 100%;
+    }
+
+    td {
+      padding: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box">
+    <h2>Create Account</h2>
+
+    <form method="POST" action="send.php" onsubmit="return validation()">
+      <table>
+        <tr>
+          <td>
+            <input type="text" id="user" name="first" placeholder="First Name" />
+            <br /><span id="userr"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="text" name="last" placeholder="Last Name" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="text" id="email" name="email" placeholder="Email" />
+            <br /><span id="emaill"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="password" id="pass" name="password" placeholder="Password" />
+            <br /><span id="passs"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="password" id="cpass" name="confirm" placeholder="Confirm Password" />
+            <br /><span id="cpasss"></span>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="hidden" maxlength="6" id="otp" name="otp" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="hidden" id="subject" name="subject" value="Received otp" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div class="gender-group">
+              <strong>Gender:</strong>
+
+              <label>
+                <input type="radio" name="gen" value="Male" />
+                Male
+              </label>
+
+              <label>
+                <input type="radio" name="gen" value="Female" />
+                Female
+              </label>
+              <br /><span id="genn"></span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="submit" name="send" id="btn" />
+          </td>
+        </tr>
+      </table>
+    </form>
+
+    <p>Already have an account? <a href="login.php">Login</a></p>
+  </div>
+</body>
+<script>
+  function generatenumber() {
+    let min = 100000;
+    let max = 999999;
+    let randomnumber = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    let lastgeneratednum = localStorage.getItem("lastgeneratednum");
+    while (randomnumber === parseInt(lastgeneratednum)) {
+      randomnumber = Math.floor(Math.random() * ma(max - min + 1)) + min;
+    }
+    localStorage.setItem("lastgeneratednum", randomnumber);
+    return randomnumber;
+  }
+  document.getElementById("otp").value = generatenumber();
+
+  function validation() {
+    var user = document.getElementById("user").value;
+    var pass = document.getElementById("pass").value;
+    var cpass = document.getElementById("cpass").value;
+    var email = document.getElementById("email").value;
+    //   var mobile = document.getElementById("mobile").value;
+    if (user == "") {
+      document.getElementById("userr").innerHTML = "Please Enter user name";
+      return false;
+    }
+    if (user.length < 2) {
+      document.getElementById("userr").innerHTML =
+        "name must be greater than 1 character";
+      return false;
+    }
+    if (!/^[A-Za-z]+$/.test(user)) {
+      document.getElementById("userr").innerHTML =
+        "Only alphabets are allowed";
+      return false;
+    } else {
+      document.getElementById("userr").innerHTML = "";
+    }
+
+    //   if (email == "") {
+    //     document.getElementById("emaill").innerHTML = "Please Enter your email";
+    //     return false;
+    //   }
+    //   if (email.indexOf("@") <= 0) {
+    //     document.getElementById("emaill").innerHTML = "invalid position of @";
+    //     return false;
+    //   }
+    //   if (email.charAt(email.length - 4) != ".") {
+    //     document.getElementById("emaill").innerHTML = "invalid position of .";
+    //     return false;
+    //   } else {
+    //     document.getElementById("emaill").innerHTML = "";
+    //   }
+
+    let emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailPattern.test(email)) {
+      document.getElementById("emaill").innerHTML = "Invalid email format";
+      return false;
+    }
+    if (email == "") {
+      document.getElementById("emaill").innerHTML = "Please Enter your email";
+      return false;
+    } else {
+      document.getElementById("emaill").innerHTML = "";
+    }
+
+    if (pass == "") {
+      document.getElementById("passs").innerHTML = "Please Enter password";
+      return false;
+    }
+    if (pass.length < 8) {
+      document.getElementById("passs").innerHTML =
+        "password atleast be of 8 character";
+      return false;
+    }
+    if (pass.search(/[0-9]/) == -1) {
+      document.getElementById("passs").innerHTML =
+        "password must contain atleast 1 number";
+      return false;
+    }
+    if (pass.search(/[a-z]/) == -1) {
+      document.getElementById("passs").innerHTML =
+        "password must contain atleast 1 Lower case character";
+      return false;
+    }
+    if (pass.search(/[A-Z]/) == -1) {
+      document.getElementById("passs").innerHTML =
+        "password must contain atleast 1 Upper case character";
+      return false;
+    }
+    if (pass.search(/[!\@\#\$\%\^\&\*\(\)\_\-\;\:\|\,\<\>\.\?\/]/) == -1) {
+      document.getElementById("passs").innerHTML =
+        "password must contain atleast 1 special character";
+      return false;
+    } else {
+      document.getElementById("passs").innerHTML = "";
+    }
+    if (cpass == "") {
+      document.getElementById("cpasss").innerHTML =
+        "Please re-enter your password";
+      return false;
+    }
+    if (cpass != pass) {
+      document.getElementById("cpasss").innerHTML = "Password not matched";
+      return false;
+    } else {
+      document.getElementById("cpasss").innerHTML = "";
+    }
+
+    let gender = document.querySelector('input[name="gen"]:checked');
+    if (!gender) {
+      document.getElementById("genn").innerHTML = "Please select gender";
+      return false;
+    } else {
+      document.getElementById("genn").innerHTML = "";
+    }
+
+    //   if (mobile == "") {
+    //     document.getElementById("mobilee").innerHTML =
+    //       "Please Enter phone number";
+    //     return false;
+    //   }
+    //   if (isNaN(mobile)) {
+    //     document.getElementById("mobilee").innerHTML =
+    //       "please enter numbers only";
+    //     return false;
+    //   }
+    //   if (mobile.length < 10 || mobile.length > 10) {
+    //     document.getElementById("mobilee").innerHTML = "must be 10 digits";
+    //     return false;
+    //   } else {
+    //     document.getElementById("mobilee").innerHTML = "";
+    //   }
+    return true;
+  }
+</script>
+
+</html>
